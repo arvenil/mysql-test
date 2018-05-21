@@ -1,0 +1,43 @@
+language: go
+
+go:
+  - 1.10.x
+
+env:
+  matrix:
+    - MYSQL_IMAGE=mysql:5.5
+    - MYSQL_IMAGE=mysql:5.6
+    - MYSQL_IMAGE=mysql:5.7
+    - MYSQL_IMAGE=mysql:8.0
+    - MYSQL_IMAGE=percona/percona-server:5.6
+    - MYSQL_IMAGE=percona/percona-server:5.7
+    - MYSQL_IMAGE=percona:5.5
+    - MYSQL_IMAGE=percona:5.6
+    - MYSQL_IMAGE=percona:5.7
+    - MYSQL_IMAGE=mariadb:5.5
+    - MYSQL_IMAGE=mariadb:10.0
+    - MYSQL_IMAGE=mariadb:10.1
+    - MYSQL_IMAGE=mariadb:10.2
+    - MYSQL_IMAGE=mariadb:10.3
+
+services:
+  - docker
+
+install:
+  # ensure that vendor/ is in sync with code and Gopkg.*
+  - curl https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 -L -o ~/dep && chmod +x ~/dep
+  - rm -fr vendor/
+  - ~/dep ensure -v
+  - git diff --exit-code
+
+before_script:
+  - docker --version
+  - docker-compose --version
+  - docker-compose up -d
+  - ./with_backoff.sh docker-compose exec mysql mysql -uroot -e 'SELECT 1'
+
+script:
+  - go run main.go
+
+notifications:
+  email: false

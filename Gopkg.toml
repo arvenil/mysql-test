@@ -5,4 +5,6 @@
 
 [[constraint]]
   name = "github.com/go-sql-driver/mysql"
-  branch = "master"
+  # Use revision before merging https://github.com/go-sql-driver/mysql/pull/794
+  # https://github.com/go-sql-driver/mysql/commit/3287d94d4c6a48a63e16fffaabf27ab20203af2a
+  revision = "3287d94d4c6a48a63e16fffaabf27ab20203af2a"

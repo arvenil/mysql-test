@@ -31,6 +31,8 @@ install:
   - git diff --exit-code
 
 before_script:
+  # Host MySQL takes port 3306 so shutdown it.
+  - sudo service mysql stop
   - docker --version
   - docker-compose --version
   - docker-compose up -d

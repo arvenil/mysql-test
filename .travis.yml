@@ -36,7 +36,9 @@ before_script:
   - docker --version
   - docker-compose --version
   - docker-compose up -d
-  - ./with_backoff.sh docker-compose exec mysql mysql -uroot -e 'SELECT 1'
+  # Wait for MySQL to be up and ready.
+  # Check connection with --protocol=tcp because socket connection tends to be available earlier.
+  - ./with_backoff.sh docker-compose exec mysql mysql --protocol=tcp -uroot -e 'SELECT 1'
 
 script:
   - go run main.go

@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  branch = "master"
+  branch = "empty_sha256"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
-  revision = "d03e4c28477ccf584ef564f3957b42550d5785f1"
+  revision = "154010235b534e16555ed80cb645076e9ad21a41"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -16,6 +16,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "dd161e195e8b90a209a606326b2836f7e8f14e583868d4f251c82254c6364d08"
+  inputs-digest = "b07299ab669402fd2ff5e03d75b24fd01539f506a240942f172e14681cf2ee94"
   solver-name = "gps-cdcl"
   solver-version = 1
